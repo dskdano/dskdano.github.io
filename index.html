@@ -25,6 +25,11 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 100px;
+        }
+
         body {
             background-color: var(--bg-dark);
             color: var(--text-main);
@@ -133,24 +138,19 @@
             width: 100%;
             margin-left: auto;
             margin-right: auto;
-            padding: 4rem 2rem;
+            padding: 2rem 2rem 4rem 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 6rem;
         }
 
         .section {
-            display: none;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.4s ease, transform 0.4s ease;
-        }
-
-        .section.active {
             display: block;
             opacity: 1;
-            transform: translateY(0);
         }
 
         .hero {
-            min-height: 60vh;
+            min-height: 70vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -182,7 +182,7 @@
                 text-shadow: 0 0 10px rgba(255, 255, 255, 0);
             }
             to {
-                text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+                text-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
             }
         }
 
@@ -243,14 +243,62 @@
             text-transform: uppercase;
         }
 
+        /* Animated Text Card */
+        .animated-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 3.5rem 2.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transition: var(--transition);
+        }
+
+        .animated-box:hover {
+            border-color: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
+        }
+
+        .animated-text {
+            font-size: 1.25rem;
+            line-height: 1.8;
+            font-weight: 600;
+            color: #ffffff;
+            animation: textGlow 3s infinite alternate ease-in-out;
+        }
+
+        .animated-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        .animated-text p:last-child {
+            margin-bottom: 0;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        @keyframes textGlow {
+            0% {
+                text-shadow: 0 0 5px rgba(255, 255, 255, 0.2), 0 0 10px rgba(255, 255, 255, 0.1);
+            }
+            50% {
+                text-shadow: 0 0 15px rgba(255, 255, 255, 0.6), 0 0 25px rgba(255, 255, 255, 0.3);
+            }
+            100% {
+                text-shadow: 0 0 5px rgba(255, 255, 255, 0.2), 0 0 10px rgba(255, 255, 255, 0.1);
+            }
+        }
+
         .grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 2rem;
         }
 
-        .grid-3 {
-            grid-template-columns: repeat(3, 1fr);
+        .grid-4 {
+            grid-template-columns: repeat(4, 1fr);
         }
 
         .card {
@@ -348,13 +396,17 @@
             background: var(--bg-dark);
         }
 
-        @media (max-width: 900px) {
-            .grid, .grid-3 {
-                grid-template-columns: 1fr;
+        @media (max-width: 1024px) {
+            .grid-4 {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
 
         @media (max-width: 768px) {
+            .grid, .grid-4 {
+                grid-template-columns: 1fr;
+            }
+
             .menu-toggle {
                 display: flex;
             }
@@ -400,35 +452,39 @@
             .btn {
                 width: 100%;
             }
+
+            .animated-text {
+                font-size: 1.05rem;
+            }
         }
     </style>
 </head>
 <body>
     <header>
         <div class="nav-container">
-            <a href="#home" class="logo" data-section="home">D4N0NEK CREW</a>
+            <a href="#home" class="logo">D4N0NEK CREW</a>
             <button class="menu-toggle" aria-label="Menu">
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
             <nav class="nav-links">
-                <a href="#home" class="nav-item active" data-section="home">Strona główna</a>
-                <a href="#crew" class="nav-item" data-section="crew">D4N0NEK CREW</a>
-                <a href="#announcements" class="nav-item" data-section="announcements">OGŁOSZENIA</a>
-                <a href="#discord" class="nav-item" data-section="discord">Discord</a>
-                <a href="#youtube" class="nav-item" data-section="youtube">YouTube</a>
+                <a href="#home" class="nav-item active">Strona główna</a>
+                <a href="#crew" class="nav-item">D4N0NEK CREW</a>
+                <a href="#announcements" class="nav-item">OGŁOSZENIA</a>
+                <a href="#discord" class="nav-item">Discord</a>
+                <a href="#youtube" class="nav-item">YouTube</a>
             </nav>
         </div>
     </header>
 
     <main>
-        <section id="home" class="section active">
+        <section id="home" class="section">
             <div class="hero">
                 <h1>D4N0NEK CREW</h1>
                 <div class="hero-buttons">
-                    <a href="#crew" class="btn btn-primary" data-section="crew">D4N0NEK CREW</a>
-                    <a href="#discord" class="btn btn-secondary" data-section="discord">Discord</a>
+                    <a href="#crew" class="btn btn-primary">D4N0NEK CREW</a>
+                    <a href="#discord" class="btn btn-secondary">Discord</a>
                 </div>
             </div>
         </section>
@@ -437,12 +493,11 @@
             <div class="section-header">
                 <h2>D4N0NEK CREW</h2>
             </div>
-            <div class="grid">
-                <div class="card">
-                    <div class="card-icon">
-                        <svg viewBox="0 0 24 24" width="40" height="40" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-                    </div>
-                    <h3 class="card-title">D4N0NEK CREW</h3>
+            <div class="animated-box">
+                <div class="animated-text">
+                    <p>Cześć, jeśli tak jak DSK TEAM i D4N0NEK CREW lubisz zagrać w FiveM oraz w przyszłości inne tytuły to jesteś w świetnym miejscu!</p>
+                    <p>Wbij na Rekrutacje na Discordzie D4N0NEK COMMUNITY a dowiesz się więcej o naszym TEAMIE oraz benefitów związanych z byciem Nagrywkowiczem!</p>
+                    <p>Na co jeszcze czekasz? Wejdź już teraz a będziesz zadowolony!</p>
                 </div>
             </div>
         </section>
@@ -492,7 +547,7 @@
             <div class="section-header">
                 <h2>YouTube</h2>
             </div>
-            <div class="grid grid-3">
+            <div class="grid grid-4">
                 <div class="card">
                     <div class="card-icon">
                         <svg viewBox="0 0 24 24" width="40" height="40" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
@@ -514,6 +569,13 @@
                     <h3 class="card-title">Siwiasty</h3>
                     <a href="https://www.youtube.com/@siwiasty_fivem" target="_blank" rel="noopener noreferrer" class="btn">Odwiedź kanał</a>
                 </div>
+                <div class="card">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" width="40" height="40" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                    </div>
+                    <h3 class="card-title">DSK TEAM</h3>
+                    <a href="https://www.youtube.com/@DSKTEAMYT" target="_blank" rel="noopener noreferrer" class="btn">Odwiedź kanał</a>
+                </div>
             </div>
         </section>
     </main>
@@ -524,64 +586,41 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const navLinks = document.querySelectorAll('[data-section]');
-            const sections = document.querySelectorAll('.section');
+            const navItems = document.querySelectorAll('.nav-links .nav-item');
             const menuToggle = document.querySelector('.menu-toggle');
             const navMenu = document.querySelector('.nav-links');
-
-            function switchSection(targetId) {
-                sections.forEach(section => {
-                    if (section.id === targetId) {
-                        section.classList.add('active');
-                    } else {
-                        section.classList.remove('active');
-                    }
-                });
-
-                document.querySelectorAll('.nav-item').forEach(link => {
-                    if (link.getAttribute('data-section') === targetId) {
-                        link.classList.add('active');
-                    } else {
-                        link.classList.remove('active');
-                    }
-                });
-
-                if (navMenu.classList.contains('active')) {
-                    navMenu.classList.remove('active');
-                    menuToggle.classList.remove('active');
-                }
-
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
-
-            navLinks.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const targetId = link.getAttribute('data-section');
-                    switchSection(targetId);
-                    history.pushState(null, '', `#${targetId}`);
-                });
-            });
+            const sections = document.querySelectorAll('section');
 
             menuToggle.addEventListener('click', () => {
                 menuToggle.classList.toggle('active');
                 navMenu.classList.toggle('active');
             });
 
-            function handleHashChange() {
-                const hash = window.location.hash.substring(1);
-                if (hash && document.getElementById(hash)) {
-                    switchSection(hash);
-                } else {
-                    switchSection('home');
-                }
-            }
+            navItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    if (navMenu.classList.contains('active')) {
+                        navMenu.classList.remove('active');
+                        menuToggle.classList.remove('active');
+                    }
+                });
+            });
 
-            window.addEventListener('hashchange', handleHashChange);
-            
-            if (window.location.hash) {
-                handleHashChange();
-            }
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - 150;
+                    if (pageYOffset >= sectionTop) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navItems.forEach(item => {
+                    item.classList.remove('active');
+                    if (item.getAttribute('href') === `#${current}`) {
+                        item.classList.add('active');
+                    }
+                });
+            });
         });
     </script>
 </body>

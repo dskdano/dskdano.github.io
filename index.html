@@ -3,18 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>dskdano :: Centrala Linków</title>
+    <title>D4N0NEK CREW</title>
     <style>
-        /* --- GŁÓWNA KONFIGURACJA --- */
         :root {
             --bg-color: #000000;
             --text-color: #ffffff;
-            --accent-color: #5865F2; /* Kolor Discord */
             --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             --transition-speed: 0.3s;
         }
 
-        /* --- ZRESETOWANIE MARGINESÓW I PADDINGÓW --- */
         * {
             margin: 0;
             padding: 0;
@@ -25,11 +22,10 @@
             font-family: var(--font-family);
             background-color: var(--bg-color);
             color: var(--text-color);
-            overflow-x: hidden; /* Ukrywa poziomy pasek przewijania przy animacjach */
+            overflow-x: hidden;
             line-height: 1.6;
         }
 
-        /* --- UNIWERSALNE ANIMACJE CSS --- */
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
@@ -40,11 +36,9 @@
             50% { transform: translateY(-5px); }
         }
 
-        /* --- KLASY DO ZASTOSOWANIA ANIMACJI --- */
         .fadeIn { animation: fadeIn 1s ease-out forwards; }
         .bounceIn { animation: bounceIn 2s ease-in-out infinite; }
 
-        /* --- GŁÓWNA STRUKTURA (CONTAINER) --- */
         .main-container {
             max-width: 800px;
             margin: 0 auto;
@@ -55,11 +49,9 @@
             min-height: 100vh;
         }
 
-        /* --- NAGŁÓWEK --- */
         .main-header {
             text-align: center;
-            margin-bottom: 60px;
-            opacity: 0; /* Dla animacji fadeIn */
+            margin-bottom: 40px;
         }
 
         .main-header h1 {
@@ -70,126 +62,119 @@
             color: var(--text-color);
         }
 
-        .main-header p {
-            font-size: 1.2rem;
-            color: #aaaaaa;
-            margin-top: 10px;
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: center;
         }
 
-        /* --- SEKTSJA PRZYCISKÓW Z DISCORDEM --- */
-        .discord-section {
+        .links-section {
             width: 100%;
             max-width: 400px;
-            margin-bottom: 60px;
+            margin-bottom: 40px;
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 15px;
         }
 
-        .button-discord {
+        .btn {
             display: flex;
             justify-content: center;
             align-items: center;
             width: 100%;
-            padding: 18px 25px;
+            padding: 16px 20px;
             background-color: transparent;
             color: var(--text-color);
             border: 2px solid var(--text-color);
-            border-radius: 5px;
+            border-radius: 6px;
             text-decoration: none;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 700;
             text-transform: uppercase;
             transition: transform var(--transition-speed), background-color var(--transition-speed), color var(--transition-speed);
         }
 
-        .button-discord:hover {
-            transform: scale(1.05); /* Powiększenie */
+        .btn:hover {
+            transform: scale(1.04);
             background-color: var(--text-color);
             color: var(--bg-color);
         }
 
-        /* Dodatkowy styl dla pierwszego przycisku */
-        .discord-1 { border-color: var(--text-color); }
-        /* Dodatkowy styl dla drugiego przycisku */
-        .discord-2 { border-color: #ffffff90; color: #ffffff90; }
-        .discord-2:hover { border-color: var(--text-color); color: var(--bg-color); }
+        .btn-secondary {
+            border-color: #ffffff90;
+            color: #ffffff90;
+        }
 
-        /* --- NOWA OPCJA: PANEL AKTUALNOŚCI --- */
+        .btn-secondary:hover {
+            border-color: var(--text-color);
+            color: var(--bg-color);
+        }
+
         .info-panel {
             width: 100%;
+            max-width: 400px;
             background-color: #111111;
-            padding: 30px;
-            border-radius: 5px;
+            padding: 25px;
+            border-radius: 6px;
             border: 1px solid #333333;
-            opacity: 0; /* Dla animacji fadeIn */
+            margin-bottom: 40px;
         }
 
         .info-panel h2 {
-            font-size: 1.8rem;
+            font-size: 1.4rem;
             font-weight: 700;
-            margin-bottom: 20px;
             border-bottom: 2px solid var(--text-color);
             display: inline-block;
             padding-bottom: 5px;
+            text-transform: uppercase;
         }
 
-        .info-panel ul {
-            list-style: none;
-        }
-
-        .info-panel li {
-            margin-bottom: 15px;
-            color: #cccccc;
-        }
-
-        .info-panel li strong {
-            color: var(--text-color);
-        }
-
-        /* --- STOPKA --- */
         .main-footer {
             margin-top: auto;
             text-align: center;
-            padding-top: 40px;
+            padding-top: 30px;
             font-size: 0.9rem;
             color: #666666;
         }
     </style>
 </head>
 <body>
-    <div class="main-container">
-        <!-- Nagłówek -->
-        <header class="main-header fadeIn">
-            <h1>dskdano :: Centrala</h1>
-            <p>Minimalistyczne b&w. Twoje linki do Discorda.</p>
+    <div class="main-container fadeIn">
+        <header class="main-header">
+            <h1>D4N0NEK CREW</h1>
         </header>
 
-        <!-- Sekcja Linków (Główne Wezwanie do Działania) -->
-        <div class="discord-section">
-            <!-- Przycisk 1 - Pulsuje, żeby przyciągnąć uwagę -->
-            <a href="https://discord.gg/F48f4TyXw5" target="_blank" class="button-discord discord-1 bounceIn">
-                Dołącz do #1 Discorda (Główny)
+        <div class="links-section">
+            <a href="https://discord.gg/F48f4TyXw5" target="_blank" class="btn bounceIn">
+                D4N0NEK COMMUNITY
             </a>
-            <!-- Przycisk 2 -->
-            <a href="https://discord.gg/46z4WthKu" target="_blank" class="button-discord discord-2">
-                Dolej do #2 Discorda (Zapasowy)
+            <a href="https://discord.gg/46z4WthKu" target="_blank" class="btn btn-secondary">
+                DSK TEAM
             </a>
         </div>
 
-        <!-- Nowa Sekcja: Ostatnie Wieści -->
-        <div class="info-panel fadeIn delayed">
-            <h2>Ostatnie Wieści</h2>
-            <ul>
-                <li><strong>[NOWE]</strong> Całkowity redesign strony na minimalistyczny b&w.</li>
-                <li><strong>[FIX]</strong> Poprawa animacji wejścia i interakcji z przyciskami.</li>
-                <li>Wkrótce dodamy licznik użytkowników online...</li>
-            </ul>
+        <h2 class="section-title">YouTube</h2>
+        <div class="links-section">
+            <a href="https://www.youtube.com/@danonekYT4" target="_blank" class="btn btn-secondary">
+                D4N0NEK
+            </a>
+            <a href="https://www.youtube.com/@adminkubbrok" target="_blank" class="btn btn-secondary">
+                Kubrok
+            </a>
+            <a href="https://www.youtube.com/@siwiasty_fivem" target="_blank" class="btn btn-secondary">
+                Siwiasty
+            </a>
         </div>
 
-        <!-- Stopka -->
+        <div class="info-panel">
+            <h2>OGŁOSZENIA</h2>
+        </div>
+
         <footer class="main-footer">
-            &copy; 2026 dskdano. Wszystkie prawa zastrzeżone.
+            &copy; 2026 D4N0NEK CREW. Wszystkie prawa zastrzeżone.
         </footer>
     </div>
 </body>

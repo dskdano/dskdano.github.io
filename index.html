@@ -4,20 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>D4N0NEK CREW</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-main: #0a0a0a;
-            --bg-card: #141414;
-            --bg-card-hover: #1e1e1e;
-            --border-color: #262626;
-            --border-color-hover: #404040;
-            --text-primary: #ffffff;
-            --text-secondary: #888888;
-            --btn-bg: #ffffff;
-            --btn-text: #000000;
-            --btn-hover: #cccccc;
-            --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            --transition-speed: 0.3s;
+            --bg-dark: #080808;
+            --bg-card: #121212;
+            --bg-card-hover: #1c1c1c;
+            --border: #222222;
+            --border-hover: #ffffff;
+            --text-main: #ffffff;
+            --text-muted: #888888;
+            --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         * {
@@ -26,29 +25,25 @@
             box-sizing: border-box;
         }
 
-        html, body {
-            height: 100%;
-            background-color: var(--bg-main);
-            color: var(--text-primary);
-            font-family: var(--font-family);
-            line-height: 1.6;
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
             overflow-x: hidden;
         }
 
-        body {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        .header {
+        header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background-color: rgba(10, 10, 10, 0.85);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border-color);
+            background: rgba(8, 8, 8, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
             z-index: 1000;
         }
 
@@ -63,53 +58,55 @@
 
         .logo {
             font-size: 1.25rem;
-            font-weight: 700;
-            letter-spacing: 0.1em;
-            color: var(--text-primary);
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: var(--text-main);
             text-decoration: none;
-            transition: opacity var(--transition-speed);
+            text-transform: uppercase;
+            transition: var(--transition);
         }
 
         .logo:hover {
-            opacity: 0.8;
+            opacity: 0.7;
         }
 
-        .nav-menu {
+        .nav-links {
             display: flex;
             gap: 2rem;
             align-items: center;
         }
 
-        .nav-link {
-            color: var(--text-secondary);
+        .nav-links a {
+            color: var(--text-muted);
             text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 500;
+            font-size: 0.85rem;
+            font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
-            transition: color var(--transition-speed);
+            letter-spacing: 1px;
+            transition: var(--transition);
             position: relative;
-            padding-bottom: 0.25rem;
+            padding: 0.5rem 0;
         }
 
-        .nav-link:hover,
-        .nav-link.active {
-            color: var(--text-primary);
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--text-main);
         }
 
-        .nav-link::after {
+        .nav-links a::after {
             content: '';
             position: absolute;
             bottom: 0;
-            left: 0;
+            left: 50%;
             width: 0;
-            height: 1px;
-            background-color: var(--text-primary);
-            transition: width var(--transition-speed);
+            height: 2px;
+            background: var(--text-main);
+            transition: var(--transition);
+            transform: translateX(-50%);
         }
 
-        .nav-link.active::after,
-        .nav-link:hover::after {
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
             width: 100%;
         }
 
@@ -120,31 +117,29 @@
             cursor: pointer;
             flex-direction: column;
             gap: 6px;
-            padding: 4px;
         }
 
         .menu-toggle span {
-            display: block;
             width: 24px;
             height: 2px;
-            background-color: var(--text-primary);
-            transition: transform var(--transition-speed), opacity var(--transition-speed);
+            background-color: var(--text-main);
+            transition: var(--transition);
         }
 
-        .main-content {
+        main {
             flex: 1;
             margin-top: 80px;
             max-width: 1200px;
             width: 100%;
             margin-left: auto;
             margin-right: auto;
-            padding: 3rem 2rem;
+            padding: 4rem 2rem;
         }
 
         .section {
             display: none;
             opacity: 0;
-            transform: translateY(15px);
+            transform: translateY(20px);
             transition: opacity 0.4s ease, transform 0.4s ease;
         }
 
@@ -161,21 +156,37 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
+            border: 1px solid var(--border);
+            border-radius: 16px;
             padding: 4rem 2rem;
-            background: linear-gradient(180deg, rgba(20,20,20,0.5) 0%, rgba(10,10,10,0.5) 100%);
+            background: radial-gradient(circle at center, rgba(30, 30, 30, 0.4) 0%, rgba(8, 8, 8, 0.8) 100%);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            transition: var(--transition);
         }
 
-        .hero-title {
+        .hero:hover {
+            border-color: #333333;
+        }
+
+        .hero h1 {
             font-size: 3.5rem;
             font-weight: 800;
-            letter-spacing: 0.08em;
-            margin-bottom: 2.5rem;
+            letter-spacing: 4px;
+            margin-bottom: 2rem;
             text-transform: uppercase;
+            animation: pulseText 3s infinite alternate ease-in-out;
         }
 
-        .hero-actions {
+        @keyframes pulseText {
+            from {
+                text-shadow: 0 0 10px rgba(255, 255, 255, 0);
+            }
+            to {
+                text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+            }
+        }
+
+        .hero-buttons {
             display: flex;
             gap: 1.5rem;
         }
@@ -184,187 +195,161 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 0.85rem 2rem;
-            border-radius: 6px;
-            font-size: 0.9rem;
-            font-weight: 600;
+            padding: 1rem 2.5rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 700;
             text-decoration: none;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            letter-spacing: 1px;
+            transition: var(--transition);
             cursor: pointer;
-            transition: all var(--transition-speed);
-            border: 1px solid transparent;
         }
 
         .btn-primary {
-            background-color: var(--btn-bg);
-            color: var(--btn-text);
+            background-color: var(--text-main);
+            color: var(--bg-dark);
+            border: 1px solid var(--text-main);
         }
 
         .btn-primary:hover {
-            background-color: var(--btn-hover);
-            transform: translateY(-2px);
+            background-color: #e0e0e0;
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.15);
         }
 
         .btn-secondary {
             background-color: transparent;
-            color: var(--text-primary);
-            border-color: var(--border-color-hover);
+            color: var(--text-main);
+            border: 1px solid var(--border);
         }
 
         .btn-secondary:hover {
-            background-color: var(--bg-card-hover);
-            border-color: var(--text-primary);
-            transform: translateY(-2px);
-        }
-
-        .btn-card {
-            width: 100%;
-            background-color: transparent;
-            color: var(--text-primary);
-            border-color: var(--border-color);
-        }
-
-        .btn-card:hover {
-            background-color: var(--text-primary);
-            color: var(--bg-main);
+            border-color: var(--text-main);
+            background-color: rgba(255, 255, 255, 0.05);
+            transform: translateY(-4px);
         }
 
         .section-header {
             margin-bottom: 3rem;
-            border-bottom: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border);
             padding-bottom: 1rem;
         }
 
         .section-header h2 {
             font-size: 2rem;
-            font-weight: 700;
-            letter-spacing: 0.05em;
+            font-weight: 800;
+            letter-spacing: 2px;
             text-transform: uppercase;
         }
 
-        .crew-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-
-        .crew-card {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 3rem 2rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            gap: 1.5rem;
-            transition: transform var(--transition-speed), border-color var(--transition-speed);
-        }
-
-        .crew-card:hover {
-            transform: translateY(-4px);
-            border-color: var(--border-color-hover);
-        }
-
-        .crew-card h3 {
-            font-size: 1.25rem;
-            font-weight: 600;
-            letter-spacing: 0.05em;
-        }
-
-        .table-wrapper {
-            width: 100%;
-            overflow-x: auto;
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            background-color: var(--bg-card);
-        }
-
-        .announcements-table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: left;
-        }
-
-        .announcements-table th {
-            padding: 1.25rem 1.5rem;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--text-secondary);
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .announcements-table td {
-            padding: 1.25rem 1.5rem;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .announcements-table tr:last-child td {
-            border-bottom: none;
-        }
-
-        .cards-grid {
+        .grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 2rem;
         }
 
-        .cards-grid-3 {
+        .grid-3 {
             grid-template-columns: repeat(3, 1fr);
         }
 
         .card {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border-color);
+            background: var(--bg-card);
+            border: 1px solid var(--border);
             border-radius: 12px;
-            padding: 2.5rem 2rem;
+            padding: 3rem 2rem;
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
-            transition: transform var(--transition-speed), border-color var(--transition-speed);
+            transition: var(--transition);
+            position: relative;
         }
 
         .card:hover {
-            transform: translateY(-4px);
-            border-color: var(--border-color-hover);
-            background-color: var(--bg-card-hover);
+            transform: translateY(-6px);
+            border-color: var(--border-hover);
+            background: var(--bg-card-hover);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
         }
 
         .card-icon {
             margin-bottom: 1.5rem;
-            color: var(--text-primary);
+            color: var(--text-main);
+            transition: var(--transition);
+        }
+
+        .card:hover .card-icon {
+            transform: scale(1.15);
         }
 
         .card-title {
-            font-size: 1.25rem;
-            font-weight: 600;
+            font-size: 1.2rem;
+            font-weight: 700;
             margin-bottom: 2rem;
-            letter-spacing: 0.03em;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
-        .footer {
-            border-top: 1px solid var(--border-color);
+        .card .btn {
+            width: 100%;
+            background-color: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--border);
+        }
+
+        .card .btn:hover {
+            background-color: var(--text-main);
+            color: var(--bg-dark);
+            border-color: var(--text-main);
+        }
+
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: var(--bg-card);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th {
+            padding: 1.2rem 1.5rem;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            border-bottom: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        td {
+            padding: 1.2rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        footer {
+            border-top: 1px solid var(--border);
             padding: 2rem;
-            background-color: var(--bg-main);
-            margin-top: auto;
-        }
-
-        .footer-container {
-            max-width: 1200px;
-            margin: 0 auto;
             text-align: center;
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            margin-top: auto;
+            background: var(--bg-dark);
         }
 
         @media (max-width: 900px) {
-            .cards-grid,
-            .cards-grid-3 {
+            .grid, .grid-3 {
                 grid-template-columns: 1fr;
             }
         }
@@ -386,28 +371,28 @@
                 transform: translateY(-8px) rotate(-45deg);
             }
 
-            .nav-menu {
+            .nav-links {
                 position: absolute;
                 top: 100%;
                 left: 0;
                 width: 100%;
-                background-color: var(--bg-main);
-                border-bottom: 1px solid var(--border-color);
+                background: var(--bg-dark);
+                border-bottom: 1px solid var(--border);
                 flex-direction: column;
                 padding: 2rem;
                 gap: 1.5rem;
                 display: none;
             }
 
-            .nav-menu.active {
+            .nav-links.active {
                 display: flex;
             }
 
-            .hero-title {
-                font-size: 2.25rem;
+            .hero h1 {
+                font-size: 2.2rem;
             }
 
-            .hero-actions {
+            .hero-buttons {
                 flex-direction: column;
                 width: 100%;
             }
@@ -419,7 +404,7 @@
     </style>
 </head>
 <body>
-    <header class="header">
+    <header>
         <div class="nav-container">
             <a href="#home" class="logo" data-section="home">D4N0NEK CREW</a>
             <button class="menu-toggle" aria-label="Menu">
@@ -427,21 +412,21 @@
                 <span></span>
                 <span></span>
             </button>
-            <nav class="nav-menu">
-                <a href="#home" class="nav-link active" data-section="home">Strona główna</a>
-                <a href="#crew" class="nav-link" data-section="crew">D4N0NEK CREW</a>
-                <a href="#announcements" class="nav-link" data-section="announcements">OGŁOSZENIA</a>
-                <a href="#discord" class="nav-link" data-section="discord">Discord</a>
-                <a href="#youtube" class="nav-link" data-section="youtube">YouTube</a>
+            <nav class="nav-links">
+                <a href="#home" class="nav-item active" data-section="home">Strona główna</a>
+                <a href="#crew" class="nav-item" data-section="crew">D4N0NEK CREW</a>
+                <a href="#announcements" class="nav-item" data-section="announcements">OGŁOSZENIA</a>
+                <a href="#discord" class="nav-item" data-section="discord">Discord</a>
+                <a href="#youtube" class="nav-item" data-section="youtube">YouTube</a>
             </nav>
         </div>
     </header>
 
-    <main class="main-content">
+    <main>
         <section id="home" class="section active">
             <div class="hero">
-                <h1 class="hero-title">D4N0NEK CREW</h1>
-                <div class="hero-actions">
+                <h1>D4N0NEK CREW</h1>
+                <div class="hero-buttons">
                     <a href="#crew" class="btn btn-primary" data-section="crew">D4N0NEK CREW</a>
                     <a href="#discord" class="btn btn-secondary" data-section="discord">Discord</a>
                 </div>
@@ -452,12 +437,12 @@
             <div class="section-header">
                 <h2>D4N0NEK CREW</h2>
             </div>
-            <div class="crew-container">
-                <div class="crew-card">
-                    <div class="crew-icon">
-                        <svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            <div class="grid">
+                <div class="card">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" width="40" height="40" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
                     </div>
-                    <h3>D4N0NEK CREW</h3>
+                    <h3 class="card-title">D4N0NEK CREW</h3>
                 </div>
             </div>
         </section>
@@ -466,8 +451,8 @@
             <div class="section-header">
                 <h2>OGŁOSZENIA</h2>
             </div>
-            <div class="table-wrapper">
-                <table class="announcements-table">
+            <div class="table-container">
+                <table>
                     <thead>
                         <tr>
                             <th>Data</th>
@@ -485,20 +470,20 @@
             <div class="section-header">
                 <h2>Discord</h2>
             </div>
-            <div class="cards-grid">
+            <div class="grid">
                 <div class="card">
                     <div class="card-icon">
-                        <svg viewBox="0 0 24 24" width="36" height="36" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.893.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+                        <svg viewBox="0 0 24 24" width="40" height="40" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.893.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
                     </div>
                     <h3 class="card-title">D4N0NEK COMMUNITY</h3>
-                    <a href="https://discord.gg" target="_blank" rel="noopener noreferrer" class="btn btn-card">Dołącz do Discorda</a>
+                    <a href="https://discord.gg" target="_blank" rel="noopener noreferrer" class="btn">Dołącz do Discorda</a>
                 </div>
                 <div class="card">
                     <div class="card-icon">
-                        <svg viewBox="0 0 24 24" width="36" height="36" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.893.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+                        <svg viewBox="0 0 24 24" width="40" height="40" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.893.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
                     </div>
                     <h3 class="card-title">DSK TEAM</h3>
-                    <a href="https://discord.gg" target="_blank" rel="noopener noreferrer" class="btn btn-card">Dołącz do Discorda</a>
+                    <a href="https://discord.gg" target="_blank" rel="noopener noreferrer" class="btn">Dołącz do Discorda</a>
                 </div>
             </div>
         </section>
@@ -507,36 +492,34 @@
             <div class="section-header">
                 <h2>YouTube</h2>
             </div>
-            <div class="cards-grid cards-grid-3">
+            <div class="grid grid-3">
                 <div class="card">
                     <div class="card-icon">
-                        <svg viewBox="0 0 24 24" width="36" height="36" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                        <svg viewBox="0 0 24 24" width="40" height="40" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
                     </div>
                     <h3 class="card-title">D4N0NEK</h3>
-                    <a href="https://www.youtube.com/@danonekYT4" target="_blank" rel="noopener noreferrer" class="btn btn-card">Odwiedź kanał</a>
+                    <a href="https://www.youtube.com/@danonekYT4" target="_blank" rel="noopener noreferrer" class="btn">Odwiedź kanał</a>
                 </div>
                 <div class="card">
                     <div class="card-icon">
-                        <svg viewBox="0 0 24 24" width="36" height="36" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                        <svg viewBox="0 0 24 24" width="40" height="40" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
                     </div>
                     <h3 class="card-title">Kubrok</h3>
-                    <a href="https://www.youtube.com/@adminkubbrok" target="_blank" rel="noopener noreferrer" class="btn btn-card">Odwiedź kanał</a>
+                    <a href="https://www.youtube.com/@adminkubbrok" target="_blank" rel="noopener noreferrer" class="btn">Odwiedź kanał</a>
                 </div>
                 <div class="card">
                     <div class="card-icon">
-                        <svg viewBox="0 0 24 24" width="36" height="36" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                        <svg viewBox="0 0 24 24" width="40" height="40" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
                     </div>
                     <h3 class="card-title">Siwiasty</h3>
-                    <a href="https://www.youtube.com/@siwiasty_fivem" target="_blank" rel="noopener noreferrer" class="btn btn-card">Odwiedź kanał</a>
+                    <a href="https://www.youtube.com/@siwiasty_fivem" target="_blank" rel="noopener noreferrer" class="btn">Odwiedź kanał</a>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer class="footer">
-        <div class="footer-container">
-            <p>&copy; D4N0NEK CREW</p>
-        </div>
+    <footer>
+        <p>&copy; D4N0NEK CREW</p>
     </footer>
 
     <script>
@@ -544,7 +527,7 @@
             const navLinks = document.querySelectorAll('[data-section]');
             const sections = document.querySelectorAll('.section');
             const menuToggle = document.querySelector('.menu-toggle');
-            const navMenu = document.querySelector('.nav-menu');
+            const navMenu = document.querySelector('.nav-links');
 
             function switchSection(targetId) {
                 sections.forEach(section => {
@@ -555,7 +538,7 @@
                     }
                 });
 
-                document.querySelectorAll('.nav-link').forEach(link => {
+                document.querySelectorAll('.nav-item').forEach(link => {
                     if (link.getAttribute('data-section') === targetId) {
                         link.classList.add('active');
                     } else {

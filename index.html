@@ -27,16 +27,12 @@
 
         html {
             scroll-behavior: smooth;
-            scroll-padding-top: 100px;
         }
 
         body {
             background-color: var(--bg-dark);
             color: var(--text-main);
             font-family: 'Inter', sans-serif;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
             overflow-x: hidden;
         }
 
@@ -45,11 +41,16 @@
             top: 0;
             left: 0;
             width: 100%;
-            background: rgba(8, 8, 8, 0.85);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-bottom: 1px solid var(--border);
+            background: rgba(8, 8, 8, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             z-index: 1000;
+            transition: var(--transition);
+        }
+
+        header:hover {
+            background: rgba(8, 8, 8, 0.9);
         }
 
         .nav-container {
@@ -131,64 +132,86 @@
             transition: var(--transition);
         }
 
-        main {
-            flex: 1;
-            margin-top: 80px;
-            max-width: 1200px;
-            width: 100%;
-            margin-left: auto;
-            margin-right: auto;
-            padding: 2rem 2rem 4rem 2rem;
-            display: flex;
-            flex-direction: column;
-            gap: 6rem;
-        }
-
+        /* Sekcje z efektem Parallax (styl Rockstar) */
         .section {
-            display: block;
-            opacity: 1;
+            position: relative;
+            min-height: 100vh;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
         }
 
-        .hero {
-            min-height: 70vh;
+        .section-overlay {
+            position: absolute;
+            top: 0; 
+            left: 0; 
+            right: 0; 
+            bottom: 0;
+            background: rgba(8, 8, 8, 0.7); /* Przyciemnienie tła dla czytelności */
+            z-index: 1;
+        }
+
+        /* Zmiana tła dla poszczególnych sekcji - podmień nazwy plików na swoje */
+        #home {
+            background-image: url('image_bfd5ca.jpg');
+        }
+        
+        #crew {
+            background-color: var(--bg-dark);
+        }
+
+        #announcements {
+            background-image: url('image_bfd5e6.jpg');
+        }
+
+        #discord {
+            background-color: var(--bg-dark);
+        }
+
+        #youtube {
+            background-image: url('image_bfd5ca.jpg');
+        }
+
+        #contact {
+            background-color: var(--bg-dark);
+        }
+
+        .section-content {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 1200px;
+            padding: 100px 2rem 4rem 2rem;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
-            text-align: center;
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 4rem 2rem;
-            background: radial-gradient(circle at center, rgba(30, 30, 30, 0.4) 0%, rgba(8, 8, 8, 0.8) 100%);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-            transition: var(--transition);
-        }
-
-        .hero:hover {
-            border-color: #333333;
         }
 
         .hero h1 {
-            font-size: 3.5rem;
+            font-size: 4.5rem;
             font-weight: 800;
-            letter-spacing: 4px;
+            letter-spacing: 6px;
             margin-bottom: 2rem;
             text-transform: uppercase;
+            text-align: center;
+            text-shadow: 0 0 20px rgba(0,0,0,0.8);
             animation: pulseText 3s infinite alternate ease-in-out;
         }
 
         @keyframes pulseText {
-            from {
-                text-shadow: 0 0 10px rgba(255, 255, 255, 0);
-            }
-            to {
-                text-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
-            }
+            from { text-shadow: 0 0 10px rgba(255, 255, 255, 0.1), 0 5px 15px rgba(0,0,0,0.8); }
+            to { text-shadow: 0 0 25px rgba(255, 255, 255, 0.5), 0 5px 15px rgba(0,0,0,0.8); }
         }
 
         .hero-buttons {
             display: flex;
             gap: 1.5rem;
+            justify-content: center;
         }
 
         .btn {
@@ -196,75 +219,80 @@
             align-items: center;
             justify-content: center;
             padding: 1rem 2.5rem;
-            border-radius: 8px;
-            font-size: 0.85rem;
+            border-radius: 30px;
+            font-size: 0.9rem;
             font-weight: 700;
             text-decoration: none;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             transition: var(--transition);
             cursor: pointer;
+            backdrop-filter: blur(5px);
         }
 
         .btn-primary {
             background-color: var(--text-main);
             color: var(--bg-dark);
-            border: 1px solid var(--text-main);
+            border: 2px solid var(--text-main);
         }
 
         .btn-primary:hover {
-            background-color: #e0e0e0;
-            transform: translateY(-4px);
-            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.15);
+            background-color: transparent;
+            color: var(--text-main);
+            transform: scale(1.05);
         }
 
         .btn-secondary {
-            background-color: transparent;
+            background-color: rgba(255, 255, 255, 0.1);
             color: var(--text-main);
-            border: 1px solid var(--border);
+            border: 2px solid rgba(255, 255, 255, 0.3);
         }
 
         .btn-secondary:hover {
             border-color: var(--text-main);
-            background-color: rgba(255, 255, 255, 0.05);
-            transform: translateY(-4px);
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
         }
 
         .section-header {
-            margin-bottom: 3rem;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 1rem;
+            margin-bottom: 4rem;
+            text-align: center;
         }
 
         .section-header h2 {
-            font-size: 2rem;
+            font-size: 2.5rem;
             font-weight: 800;
-            letter-spacing: 2px;
+            letter-spacing: 4px;
             text-transform: uppercase;
+            text-shadow: 0 5px 15px rgba(0,0,0,0.5);
         }
 
         /* Animated Text Card */
         .animated-box {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
+            background: rgba(18, 18, 18, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 16px;
-            padding: 3.5rem 2.5rem;
+            padding: 4rem 3rem;
             text-align: center;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
             transition: var(--transition);
+            max-width: 900px;
+            width: 100%;
         }
 
         .animated-box:hover {
-            border-color: rgba(255, 255, 255, 0.4);
-            box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 40px rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
         }
 
         .animated-text {
-            font-size: 1.25rem;
+            font-size: 1.35rem;
             line-height: 1.8;
-            font-weight: 600;
+            font-weight: 400;
             color: #ffffff;
             animation: textGlow 3s infinite alternate ease-in-out;
         }
@@ -276,25 +304,19 @@
         .animated-text p:last-child {
             margin-bottom: 0;
             font-weight: 700;
-            color: #ffffff;
         }
 
         @keyframes textGlow {
-            0% {
-                text-shadow: 0 0 5px rgba(255, 255, 255, 0.2), 0 0 10px rgba(255, 255, 255, 0.1);
-            }
-            50% {
-                text-shadow: 0 0 15px rgba(255, 255, 255, 0.6), 0 0 25px rgba(255, 255, 255, 0.3);
-            }
-            100% {
-                text-shadow: 0 0 5px rgba(255, 255, 255, 0.2), 0 0 10px rgba(255, 255, 255, 0.1);
-            }
+            0% { text-shadow: 0 0 5px rgba(255, 255, 255, 0.1); }
+            50% { text-shadow: 0 0 20px rgba(255, 255, 255, 0.5); }
+            100% { text-shadow: 0 0 5px rgba(255, 255, 255, 0.1); }
         }
 
         .grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 2rem;
+            width: 100%;
         }
 
         .grid-4 {
@@ -302,33 +324,33 @@
         }
 
         .card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 3rem 2rem;
+            background: rgba(18, 18, 18, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 3.5rem 2rem;
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
             transition: var(--transition);
-            position: relative;
         }
 
         .card:hover {
-            transform: translateY(-6px);
-            border-color: var(--border-hover);
-            background: var(--bg-card-hover);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+            transform: translateY(-10px);
+            border-color: rgba(255, 255, 255, 0.4);
+            background: rgba(28, 28, 28, 0.9);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
         }
 
         .card-icon {
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
             color: var(--text-main);
             transition: var(--transition);
         }
 
         .card:hover .card-icon {
-            transform: scale(1.15);
+            transform: scale(1.2);
         }
 
         .card-title {
@@ -343,7 +365,8 @@
             width: 100%;
             background-color: transparent;
             color: var(--text-main);
-            border: 1px solid var(--border);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
         }
 
         .card .btn:hover {
@@ -355,9 +378,10 @@
         .table-container {
             width: 100%;
             overflow-x: auto;
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            background: rgba(18, 18, 18, 0.7);
+            backdrop-filter: blur(10px);
         }
 
         table {
@@ -367,18 +391,18 @@
         }
 
         th {
-            padding: 1.2rem 1.5rem;
-            font-size: 0.8rem;
+            padding: 1.5rem;
+            font-size: 0.9rem;
             text-transform: uppercase;
             letter-spacing: 1px;
             color: var(--text-muted);
-            border-bottom: 1px solid var(--border);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             background: rgba(255, 255, 255, 0.02);
         }
 
         td {
-            padding: 1.2rem 1.5rem;
-            border-bottom: 1px solid var(--border);
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         tr:last-child td {
@@ -386,14 +410,13 @@
         }
 
         footer {
-            border-top: 1px solid var(--border);
-            padding: 2rem;
+            padding: 3rem 2rem;
             text-align: center;
             color: var(--text-muted);
-            font-size: 0.8rem;
-            letter-spacing: 1px;
-            margin-top: auto;
-            background: var(--bg-dark);
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            background: #050505;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         @media (max-width: 1024px) {
@@ -428,7 +451,8 @@
                 top: 100%;
                 left: 0;
                 width: 100%;
-                background: var(--bg-dark);
+                background: rgba(8, 8, 8, 0.95);
+                backdrop-filter: blur(20px);
                 border-bottom: 1px solid var(--border);
                 flex-direction: column;
                 padding: 2rem;
@@ -441,20 +465,22 @@
             }
 
             .hero h1 {
-                font-size: 2.2rem;
+                font-size: 2.5rem;
             }
 
             .hero-buttons {
                 flex-direction: column;
                 width: 100%;
+                align-items: center;
             }
 
             .btn {
                 width: 100%;
+                max-width: 300px;
             }
 
             .animated-text {
-                font-size: 1.05rem;
+                font-size: 1.1rem;
             }
         }
     </style>
@@ -481,7 +507,8 @@
 
     <main>
         <section id="home" class="section">
-            <div class="hero">
+            <div class="section-overlay"></div>
+            <div class="section-content hero">
                 <h1>D4N0NEK CREW</h1>
                 <div class="hero-buttons">
                     <a href="#crew" class="btn btn-primary">D4N0NEK CREW</a>
@@ -491,108 +518,123 @@
         </section>
 
         <section id="crew" class="section">
-            <div class="section-header">
-                <h2>D4N0NEK CREW</h2>
-            </div>
-            <div class="animated-box">
-                <div class="animated-text">
-                    <p>Cześć, jeśli tak jak DSK TEAM i D4N0NEK CREW lubisz zagrać w FiveM oraz w przyszłości inne tytuły to jesteś w świetnym miejscu!</p>
-                    <p>Wbij na Rekrutacje na Discordzie D4N0NEK COMMUNITY a dowiesz się więcej o naszym TEAMIE oraz benefitów związanych z byciem Nagrywkowiczem!</p>
-                    <p>Na co jeszcze czekasz? Wejdź już teraz a będziesz zadowolony!</p>
+            <div class="section-overlay" style="background: transparent;"></div>
+            <div class="section-content">
+                <div class="section-header">
+                    <h2>D4N0NEK CREW</h2>
+                </div>
+                <div class="animated-box">
+                    <div class="animated-text">
+                        <p>Cześć, jeśli tak jak D4N0NEK CREW lubisz zagrać w FiveM oraz w przyszłości inne tytuły to jesteś w świetnym miejscu!</p>
+                        <p>Wbij na Rekrutacje na Discordzie D4N0NEK COMMUNITY a dowiesz się więcej o naszym TEAMIE oraz benefitów związanych z byciem Nagrywkowiczem!</p>
+                        <p>Na co jeszcze czekasz? Wejdź już teraz a będziesz zadowolony!</p>
+                    </div>
                 </div>
             </div>
         </section>
 
         <section id="announcements" class="section">
-            <div class="section-header">
-                <h2>OGŁOSZENIA</h2>
-            </div>
-            <div class="table-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Data</th>
-                            <th>Tytuł</th>
-                            <th>Treść</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
+            <div class="section-overlay"></div>
+            <div class="section-content">
+                <div class="section-header">
+                    <h2>OGŁOSZENIA</h2>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>Tytuł</th>
+                                <th>Treść</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </section>
 
         <section id="discord" class="section">
-            <div class="section-header">
-                <h2>Discord</h2>
-            </div>
-            <div class="grid">
-                <div class="card">
-                    <div class="card-icon">
-                        <svg viewBox="0 0 24 24" width="40" height="40" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.893.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
-                    </div>
-                    <h3 class="card-title">D4N0NEK COMMUNITY</h3>
-                    <a href="https://discord.gg/F48f4TyXw5" target="_blank" rel="noopener noreferrer" class="btn">Dołącz do Discorda</a>
+            <div class="section-overlay" style="background: transparent;"></div>
+            <div class="section-content">
+                <div class="section-header">
+                    <h2>Discord</h2>
                 </div>
-                <div class="card">
-                    <div class="card-icon">
-                        <svg viewBox="0 0 24 24" width="40" height="40" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.893.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+                <div class="grid">
+                    <div class="card">
+                        <div class="card-icon">
+                            <svg viewBox="0 0 24 24" width="50" height="50" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.893.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+                        </div>
+                        <h3 class="card-title">D4N0NEK COMMUNITY</h3>
+                        <a href="https://discord.gg/F48f4TyXw5" target="_blank" rel="noopener noreferrer" class="btn">Dołącz do Discorda</a>
                     </div>
-                    <h3 class="card-title">DSK TEAM</h3>
-                    <a href="https://discord.gg/2Nn3Zmynsr" target="_blank" rel="noopener noreferrer" class="btn">Dołącz do Discorda</a>
+                    <div class="card">
+                        <div class="card-icon">
+                            <svg viewBox="0 0 24 24" width="50" height="50" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.893.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+                        </div>
+                        <h3 class="card-title">DSK TEAM</h3>
+                        <a href="https://discord.gg/2Nn3Zmynsr" target="_blank" rel="noopener noreferrer" class="btn">Dołącz do Discorda</a>
+                    </div>
                 </div>
             </div>
         </section>
 
         <section id="youtube" class="section">
-            <div class="section-header">
-                <h2>YouTube</h2>
-            </div>
-            <div class="grid grid-4">
-                <div class="card">
-                    <div class="card-icon">
-                        <svg viewBox="0 0 24 24" width="40" height="40" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-                    </div>
-                    <h3 class="card-title">D4N0NEK</h3>
-                    <a href="https://www.youtube.com/@danonekYT4" target="_blank" rel="noopener noreferrer" class="btn">Odwiedź kanał</a>
+            <div class="section-overlay"></div>
+            <div class="section-content">
+                <div class="section-header">
+                    <h2>YouTube</h2>
                 </div>
-                <div class="card">
-                    <div class="card-icon">
-                        <svg viewBox="0 0 24 24" width="40" height="40" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                <div class="grid grid-4">
+                    <div class="card">
+                        <div class="card-icon">
+                            <svg viewBox="0 0 24 24" width="45" height="45" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                        </div>
+                        <h3 class="card-title">D4N0NEK</h3>
+                        <a href="https://www.youtube.com/@danonekYT4" target="_blank" rel="noopener noreferrer" class="btn">Odwiedź kanał</a>
                     </div>
-                    <h3 class="card-title">Kubrok</h3>
-                    <a href="https://www.youtube.com/@adminkubbrok" target="_blank" rel="noopener noreferrer" class="btn">Odwiedź kanał</a>
-                </div>
-                <div class="card">
-                    <div class="card-icon">
-                        <svg viewBox="0 0 24 24" width="40" height="40" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                    <div class="card">
+                        <div class="card-icon">
+                            <svg viewBox="0 0 24 24" width="45" height="45" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                        </div>
+                        <h3 class="card-title">Kubrok</h3>
+                        <a href="https://www.youtube.com/@adminkubbrok" target="_blank" rel="noopener noreferrer" class="btn">Odwiedź kanał</a>
                     </div>
-                    <h3 class="card-title">Siwiasty</h3>
-                    <a href="https://www.youtube.com/@siwiasty_fivem" target="_blank" rel="noopener noreferrer" class="btn">Odwiedź kanał</a>
-                </div>
-                <div class="card">
-                    <div class="card-icon">
-                        <svg viewBox="0 0 24 24" width="40" height="40" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                    <div class="card">
+                        <div class="card-icon">
+                            <svg viewBox="0 0 24 24" width="45" height="45" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                        </div>
+                        <h3 class="card-title">Siwiasty</h3>
+                        <a href="https://www.youtube.com/@siwiasty_fivem" target="_blank" rel="noopener noreferrer" class="btn">Odwiedź kanał</a>
                     </div>
-                    <h3 class="card-title">DSK TEAM</h3>
-                    <a href="https://www.youtube.com/@DSKTEAMYT" target="_blank" rel="noopener noreferrer" class="btn">Odwiedź kanał</a>
+                    <div class="card">
+                        <div class="card-icon">
+                            <svg viewBox="0 0 24 24" width="45" height="45" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                        </div>
+                        <h3 class="card-title">DSK TEAM</h3>
+                        <a href="https://www.youtube.com/@DSKTEAMYT" target="_blank" rel="noopener noreferrer" class="btn">Odwiedź kanał</a>
+                    </div>
                 </div>
             </div>
         </section>
 
         <section id="contact" class="section">
-            <div class="section-header">
-                <h2>Kontakt</h2>
-            </div>
-            <div class="card" style="max-width: 600px; margin: 0 auto;">
-                <div class="card-icon">
-                    <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                        <polyline points="22,6 12,13 2,6"></polyline>
-                    </svg>
+            <div class="section-overlay" style="background: transparent;"></div>
+            <div class="section-content">
+                <div class="section-header">
+                    <h2>Kontakt</h2>
                 </div>
-                <h3 class="card-title">Współpraca i pytania</h3>
-                <a href="mailto:danonwspolpraca@wp.pl" class="btn">danonwspolpraca@wp.pl</a>
+                <div class="card" style="max-width: 600px; width: 100%;">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" width="50" height="50" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                    </div>
+                    <h3 class="card-title">Współpraca i pytania</h3>
+                    <a href="mailto:danonwspolpraca@wp.pl" class="btn">danonwspolpraca@wp.pl</a>
+                </div>
             </div>
         </section>
     </main>
@@ -606,7 +648,7 @@
             const navItems = document.querySelectorAll('.nav-links .nav-item');
             const menuToggle = document.querySelector('.menu-toggle');
             const navMenu = document.querySelector('.nav-links');
-            const sections = document.querySelectorAll('section');
+            const sections = document.querySelectorAll('.section');
 
             menuToggle.addEventListener('click', () => {
                 menuToggle.classList.toggle('active');
@@ -624,9 +666,12 @@
 
             window.addEventListener('scroll', () => {
                 let current = '';
+                const scrollPos = window.pageYOffset + 200;
+                
                 sections.forEach(section => {
-                    const sectionTop = section.offsetTop - 150;
-                    if (pageYOffset >= sectionTop) {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.offsetHeight;
+                    if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
                         current = section.getAttribute('id');
                     }
                 });

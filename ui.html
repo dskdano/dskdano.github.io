@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FOTOMATOR - Lokalne usuwanie tła</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f7f9fa;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            text-align: center;
+            max-width: 600px;
+            width: 90%;
+        }
+        h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+            color: #111;
+            letter-spacing: -1px;
+        }
+        p {
+            color: #666;
+            margin-bottom: 30px;
+        }
+        .btn {
+            background-color: #009af6;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+        .btn:hover {
+            background-color: #007bc4;
+        }
+        .btn-success {
+            background-color: #28a745;
+        }
+        .btn-success:hover {
+            background-color: #218838;
+        }
+        #loading {
+            display: none;
+            margin-top: 20px;
+            font-weight: bold;
+            color: #009af6;
+        }
+        #resultContainer {
+            margin-top: 30px;
+            display: none;
+        }
+        #resultContainer img {
+            max-width: 100%;
+            border-radius: 8px;
+            background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAMUlEQVQ4T2NkYGAQYcAP3hFwJrgOQw2M4wB0w6lh0IAxZBC+F9A1DHo4wONQeB2AGAAAtx8f6aQ6pRAAAAAASUVORK5CYII=');
+            border: 1px solid #ddd;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>FOTOMATOR</h1>
+        <p>W 100% automatycznie – za darmo – lokalnie w Twojej przeglądarce.</p>
+        
+        <input type="file" id="imageInput" accept="image/png, image/jpeg, image/webp" style="display:none">
+        <button class="btn" onclick="document.getElementById('imageInput').click()">Wgraj zdjęcie</button>
+        
+        <div id="loading">Pobieranie modelu AI i wycinanie tła... To może potrwać od kilku do kilkunastu sekund.</div>
+        
+        <div id="resultContainer">
+            <img id="resultImage" alt="Wynik bez tła">
+            <br>
+            <a id="downloadLink">
+                <button class="btn btn-success">Pobierz obraz (HD)</button>
+            </a>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.4.3/dist/browser/index.js"></script>
+    <script>
+        document.getElementById('imageInput').addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const loading = document.getElementById('loading');
+            const resultContainer = document.getElementById('resultContainer');
+            const resultImage = document.getElementById('resultImage');
+            const downloadLink = document.getElementById('downloadLink');
+
+            loading.style.display = 'block';
+            resultContainer.style.display = 'none';
+
+            try {
+                const imageBlob = await imglyRemoveBackground(file);
+                const url = URL.createObjectURL(imageBlob);
+
+                resultImage.src = url;
+                downloadLink.href = url;
+                downloadLink.download = 'fotomator_bez_tla.png';
+                
+                loading.style.display = 'none';
+                resultContainer.style.display = 'block';
+            } catch (error) {
+                loading.style.display = 'none';
+                alert('Wystąpił błąd podczas usuwania tła: ' + error.message);
+                console.error(error);
+            }
+        });
+    </script>
+</body>
+</html>
